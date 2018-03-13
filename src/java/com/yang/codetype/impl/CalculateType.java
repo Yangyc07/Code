@@ -41,8 +41,8 @@ public class CalculateType implements Itype {
         }
 
         codeArray[0] = String.valueOf(number1);
-        codeArray[1] = String.valueOf(number2);
-        codeArray[2] = String.valueOf(op);
+        codeArray[1] = String.valueOf(op);
+        codeArray[2] = String.valueOf(number2);
         codeArray[3] = String.valueOf("=");
 
         codeBean.setCodeArray(codeArray);

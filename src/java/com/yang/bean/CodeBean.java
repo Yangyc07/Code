@@ -13,7 +13,6 @@ import java.awt.image.BufferedImage;
  * @author 杨亚宸
  */
 //该类是验证码类
-//有两个属性：真实的值和验证码图片
 public class CodeBean {
 
     private String[] codeArray;

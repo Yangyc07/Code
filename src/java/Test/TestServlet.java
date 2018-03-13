@@ -10,6 +10,7 @@ import com.yang.bean.CodeBean;
 import com.yang.codeshape.IcodeShape;
 import com.yang.codeshape.impl.SimpleCodeShape;
 import com.yang.codetype.Itype;
+import com.yang.codetype.impl.CalculateType;
 import com.yang.codetype.impl.ChineseType;
 import com.yang.codetype.impl.EasyType;
 import java.awt.Color;
@@ -32,7 +33,7 @@ import utils.dbutils;
 public class TestServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Itype ty = Director.creatCodeBean(new ChineseType());
+        Itype ty = Director.creatCodeBean(new CalculateType());
         IcodeShape cs = new SimpleCodeShape(100, 30, ty,false);
         CodeBean cb = cs.getCodeShape();
         BufferedImage bi = cb.getBufferedimage();

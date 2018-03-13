@@ -33,7 +33,7 @@ public class SimpleCodeShape implements IcodeShape {
 
     public void drawPoint(BufferedImage bi)//画干扰点
     {
-        float yawpRate = 0.05f;// 噪声率
+        float yawpRate = 0.02f;// 噪声率
         int area = (int) (yawpRate * width * height);
         for (int i = 0; i < area; i++) {
             int x = random.nextInt(width);
@@ -87,6 +87,8 @@ public class SimpleCodeShape implements IcodeShape {
     
     public CodeBean drawCode(Graphics graphics){
         CodeBean codeBean=type.getcode();
+        Font font=new Font(new String[]{"Ravie","Antique Olive Compact","Fixedsys"}[random.nextInt(3)], Font.BOLD, 20);
+        graphics.setFont(font);
         if(codeBean!=null&&codeBean.getCodeArray()!=null&&codeBean.getResult()!=null){
             for(int i=0;i<codeBean.getCodeArray().length;i++){
                 String code=String.valueOf(codeBean.getCodeArray()[i]);
@@ -94,10 +96,6 @@ public class SimpleCodeShape implements IcodeShape {
                     AffineTransform fontAT=new AffineTransform();//图像变形类
                     int rotate = random.nextInt(25);
                     fontAT.rotate(random.nextBoolean() ? Math.toRadians(rotate) : -Math.toRadians(rotate / 2));
-                    Font fx = new Font(new String[] { "Times New Roman", "Verdana",
-                            "arial" }[random.nextInt(2)], random.nextInt(5),
-                            14 + random.nextInt(8)).deriveFont(fontAT);
-                            graphics.setFont(fx);
                 }
                   graphics.setColor(getRandColor(1, 255));
                   graphics.drawString(code, (i*width/5)+5, height/2+ random.nextInt(height/4));
