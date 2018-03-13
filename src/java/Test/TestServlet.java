@@ -10,6 +10,7 @@ import com.yang.bean.CodeBean;
 import com.yang.codeshape.IcodeShape;
 import com.yang.codeshape.impl.SimpleCodeShape;
 import com.yang.codetype.Itype;
+import com.yang.codetype.impl.ChineseType;
 import com.yang.codetype.impl.EasyType;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -23,7 +24,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
+import utils.dbutils;
 /**
  *
  * @author 杨亚宸
@@ -31,14 +32,11 @@ import javax.servlet.http.HttpSession;
 public class TestServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Director di = new Director();
-        Itype ty = di.creatCodeBean(new EasyType());
-
-        IcodeShape cs = new SimpleCodeShape(80, 30, ty);
+        Itype ty = Director.creatCodeBean(new ChineseType());
+        IcodeShape cs = new SimpleCodeShape(100, 30, ty,false);
         CodeBean cb = cs.getCodeShape();
         BufferedImage bi = cb.getBufferedimage();
         String result = cb.getResult();
-
         request.getSession().setAttribute("piccode", result.toString());
         ImageIO.write(bi, "JPG", response.getOutputStream());
     }
