@@ -20,9 +20,8 @@ import java.util.Random;
  *
  * @author 杨亚宸
  */
-public class SimpleCodeShape implements IcodeShape {
+public class SimpleCodeShape extends IcodeShape {
 
-    
     Random random = new Random();
     Itype type;
     boolean transform=true;
@@ -67,7 +66,6 @@ public class SimpleCodeShape implements IcodeShape {
         return new Color(r, g, b);
     }
 
-    @Override
     public CodeBean getCodeShape() {
         BufferedImage bi = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
         Graphics graphics = bi.getGraphics();
@@ -86,14 +84,14 @@ public class SimpleCodeShape implements IcodeShape {
     }
     
     public CodeBean drawCode(Graphics graphics){
-        CodeBean codeBean=type.getcode();
+        CodeBean codeBean=this.codeBean;
         Font font=new Font(new String[]{"Ravie","Antique Olive Compact","Fixedsys"}[random.nextInt(3)], Font.BOLD, 20);
         graphics.setFont(font);
         if(codeBean!=null&&codeBean.getCodeArray()!=null&&codeBean.getResult()!=null){
             for(int i=0;i<codeBean.getCodeArray().length;i++){
                 String code=String.valueOf(codeBean.getCodeArray()[i]);
                 if(transform){
-                    AffineTransform fontAT=new AffineTransform();//图像变形类
+                    AffineTransform fontAT=new AffineTransform();
                     int rotate = random.nextInt(25);
                     fontAT.rotate(random.nextBoolean() ? Math.toRadians(rotate) : -Math.toRadians(rotate / 2));
                 }
@@ -109,5 +107,6 @@ public class SimpleCodeShape implements IcodeShape {
         this.height = height;
         this.type = type;
         this.transform=transform;
+        this.codeBean=type.getcode();
     }
 }

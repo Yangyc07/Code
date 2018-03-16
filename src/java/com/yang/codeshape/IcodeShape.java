@@ -11,6 +11,7 @@ import com.yang.bean.CodeBean;
  *
  * @author 杨亚宸
  */
-public interface IcodeShape {
-    public CodeBean getCodeShape();
+public abstract class IcodeShape extends CodeBean{
+    public CodeBean codeBean;
+    public abstract  CodeBean getCodeShape();
 }
