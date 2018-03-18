@@ -23,13 +23,12 @@ import javax.imageio.ImageIO;
  */
 public class CreatPhoto {
     public static void main(String []args) throws IOException{
-        for(int i=0;i<10000;i++){
-        Itype ty = Director.creatCodeBean(new EasyType());
-        IcodeShape cs = new SimpleCodeShape(100, 30, ty,false);
-        CodeBean cb = cs.getCodeShape();
-        BufferedImage bi = cb.getBufferedimage();
-        String result = cb.getResult();
-        ImageIO.write(bi, "JPG", new File("g:/Photo/"+i+".jpg"));
+//        for(int i=0;i<10000;i++){
+//        Itype ty = Director.creatCodeBean(new EasyType());
+//        IcodeShape cs = new SimpleCodeShape(100, 30, ty,false);
+//        CodeBean cb = cs.getCodeShape();
+//        BufferedImage bi = cb.getBufferedimage();
+//        String result = cb.getResult();
+//        ImageIO.write(bi, "JPG", new File("g:/Photo/"+i+".jpg"));
         }
     }
-}

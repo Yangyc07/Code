@@ -14,9 +14,9 @@ import com.yang.codetype.Itype;
  * @author 杨亚宸
  */
 public class Director {
-    public static Itype creatCodeBean(Itype type){
+    public static CodeBean creatCodeBean(Itype type){
         if(type!=null){
-            return type;
+            return type.getcode();
         }
         return null;
     }

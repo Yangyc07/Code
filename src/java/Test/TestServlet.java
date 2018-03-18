@@ -32,9 +32,8 @@ import javax.servlet.http.HttpSession;
 public class TestServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Itype ty = Director.creatCodeBean(new CalculateType());
-        IcodeShape cs = new SimpleCodeShape(100, 30, ty,false);
-        CodeBean cb = cs.getCodeShape();
+        CodeBean cb = Director.creatCodeBean(new CalculateType());
+        cb = new SimpleCodeShape(100, 30, cb,false).getCodeShape();
         BufferedImage bi = cb.getBufferedimage();
         String result = cb.getResult();
         request.getSession().setAttribute("piccode", result.toString());

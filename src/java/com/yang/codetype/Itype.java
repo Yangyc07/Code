@@ -12,6 +12,5 @@ import com.yang.bean.CodeBean;
  * @author 杨亚宸
  */
 public interface Itype {
-
     CodeBean getcode();
 }

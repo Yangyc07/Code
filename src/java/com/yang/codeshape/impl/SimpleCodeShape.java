@@ -23,8 +23,8 @@ import java.util.Random;
 public class SimpleCodeShape extends IcodeShape {
 
     Random random = new Random();
-    Itype type;
     boolean transform=true;
+    CodeBean codeBean;
     
     int width = 90;
     int height = 30;
@@ -79,12 +79,8 @@ public class SimpleCodeShape extends IcodeShape {
         return codeBean;
     }
 
-    public void setType(Itype type) {
-        this.type = type;
-    }
     
     public CodeBean drawCode(Graphics graphics){
-        CodeBean codeBean=this.codeBean;
         Font font=new Font(new String[]{"Ravie","Antique Olive Compact","Fixedsys"}[random.nextInt(3)], Font.BOLD, 20);
         graphics.setFont(font);
         if(codeBean!=null&&codeBean.getCodeArray()!=null&&codeBean.getResult()!=null){
@@ -102,11 +98,10 @@ public class SimpleCodeShape extends IcodeShape {
         return codeBean;
     }
     
-    public SimpleCodeShape(int width, int height, Itype type , boolean transform) {
+    public SimpleCodeShape(int width, int height, CodeBean codeBean , boolean transform) {
         this.width = width;
         this.height = height;
-        this.type = type;
         this.transform=transform;
-        this.codeBean=type.getcode();
+        this.codeBean=codeBean;
     }
 }
