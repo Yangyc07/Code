@@ -15,6 +15,8 @@ import com.yang.codetype.impl.EasyType;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
 /**
@@ -23,12 +25,19 @@ import javax.imageio.ImageIO;
  */
 public class CreatPhoto {
     public static void main(String []args) throws IOException{
-//        for(int i=0;i<10000;i++){
-//        Itype ty = Director.creatCodeBean(new EasyType());
-//        IcodeShape cs = new SimpleCodeShape(100, 30, ty,false);
-//        CodeBean cb = cs.getCodeShape();
-//        BufferedImage bi = cb.getBufferedimage();
-//        String result = cb.getResult();
-//        ImageIO.write(bi, "JPG", new File("g:/Photo/"+i+".jpg"));
+        try {
+            //   for(int i=0;i<10000;i++){
+            CodeBean codebean = Director.creatCodeBean();
+            codebean = new SimpleCodeShape(100, 30, codebean,false);
+            BufferedImage bi = codebean.getBufferedimage();
+            String result = codebean.getResult();
+            System.out.println(result);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(CreatPhoto.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(CreatPhoto.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(CreatPhoto.class.getName()).log(Level.SEVERE, null, ex);
+        }
         }
     }

@@ -23,7 +23,8 @@
 	<form action="<%=request.getContextPath()%>/servlet/LoginServlet" method="get">
 		验证码：<input type="text" name="checkcode"/>
 		<img alt="验证码" id="imagecode" src="<%=request.getContextPath()%>/servlet/TestServlet"/>
-		<input type="submit" value="提交">
+		<a href="javascript:reloadedCode();">换一张</a><br>
+                <input type="submit" value="提交">
 	</form>
 </body>
 </html>

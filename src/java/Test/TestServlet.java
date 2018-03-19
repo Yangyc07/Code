@@ -19,6 +19,8 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -32,12 +34,20 @@ import javax.servlet.http.HttpSession;
 public class TestServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        CodeBean cb = Director.creatCodeBean(new CalculateType());
-        cb = new SimpleCodeShape(100, 30, cb,false).getCodeShape();
-        BufferedImage bi = cb.getBufferedimage();
-        String result = cb.getResult();
-        request.getSession().setAttribute("piccode", result.toString());
-        ImageIO.write(bi, "JPG", response.getOutputStream());
+        try {
+            CodeBean cb = Director.creatCodeBean();
+            cb = new SimpleCodeShape(100, 30, cb,true).getCodeShape();
+            BufferedImage bi = cb.getBufferedimage();
+            String result = cb.getResult().toLowerCase();
+            request.getSession().setAttribute("piccode", result.toString());
+            ImageIO.write(bi, "JPG", response.getOutputStream());
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TestServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(TestServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(TestServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

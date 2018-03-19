@@ -12,6 +12,8 @@ import com.yang.codetype.impl.EasyType;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.util.Random;
@@ -23,9 +25,9 @@ import java.util.Random;
 public class SimpleCodeShape extends IcodeShape {
 
     Random random = new Random();
-    boolean transform=true;
+    boolean transform = true;
     CodeBean codeBean;
-    
+
     int width = 90;
     int height = 30;
     int lineNum = 2;
@@ -74,34 +76,33 @@ public class SimpleCodeShape extends IcodeShape {
         graphics.fillRect(0, 0, width, height);
         drawLine(bi);
         drawPoint(bi);
-        CodeBean codeBean=drawCode(graphics);
+        CodeBean codeBean = drawCode((Graphics2D) graphics);
         codeBean.setBufferedimage(bi);
         return codeBean;
     }
 
-    
-    public CodeBean drawCode(Graphics graphics){
-        Font font=new Font(new String[]{"Ravie","Antique Olive Compact","Fixedsys"}[random.nextInt(3)], Font.BOLD, 20);
+    public CodeBean drawCode(Graphics2D graphics) {
+        Font font = new Font(new String[]{"Ravie", "Antique Olive Compact", "Fixedsys"}[random.nextInt(3)], Font.BOLD, 17);
         graphics.setFont(font);
-        if(codeBean!=null&&codeBean.getCodeArray()!=null&&codeBean.getResult()!=null){
-            for(int i=0;i<codeBean.getCodeArray().length;i++){
-                String code=String.valueOf(codeBean.getCodeArray()[i]);
-                if(transform){
-                    AffineTransform fontAT=new AffineTransform();
-                    int rotate = random.nextInt(25);
-                    fontAT.rotate(random.nextBoolean() ? Math.toRadians(rotate) : -Math.toRadians(rotate / 2));
+        if (codeBean != null && codeBean.getCodeArray() != null && codeBean.getResult() != null) {
+            for (int i = 0; i < codeBean.getCodeArray().length; i++) {
+                String code = String.valueOf(codeBean.getCodeArray()[i]);
+                int degree = new Random().nextInt() % 8;
+                if (transform) {
+                    graphics.rotate(-degree * Math.PI / 180,10 , 20);
                 }
-                  graphics.setColor(getRandColor(1, 255));
-                  graphics.drawString(code, (i*width/5)+5, height/2+ random.nextInt(height/4));
+                graphics.setColor(getRandColor(1, 255));
+                graphics.drawString(code, (i * width / 5) + 5, height / 2 + random.nextInt(height / 4));
+                graphics.rotate(degree * Math.PI / 180, 10, 20);
             }
         }
         return codeBean;
     }
-    
-    public SimpleCodeShape(int width, int height, CodeBean codeBean , boolean transform) {
+
+    public SimpleCodeShape(int width, int height, CodeBean codeBean, boolean transform) {
         this.width = width;
         this.height = height;
-        this.transform=transform;
-        this.codeBean=codeBean;
+        this.transform = transform;
+        this.codeBean = codeBean;
     }
 }
